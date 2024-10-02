@@ -51,9 +51,7 @@ jobs:
       # Check Maven project version and update it if it's a SNAPSHOT version
       - name: Update Version if Snapshot
         run: |
-          sed -i '/<name>swagger-petstore<\/name>/{n;s|<version>.*</version>|<version>1.0.2-SNAPSHOT</version>|}' pom.xml    
-
-
+          sed -i -E '/<artifactId>swagger-petstore<\/artifactId>/,/<\/version>/ s|<version>[0-9.]*</version>|<version>1.0.24-SNAPSHOT</version>|' pom.xml
       # Commit and push changes back to the repository, only if it's a push event
       - name: Configure Git and Push Changes
         if: github.event_name == 'push'  # Only commit and push if it's triggered by a push event
